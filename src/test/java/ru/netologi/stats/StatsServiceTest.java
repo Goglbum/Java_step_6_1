@@ -29,24 +29,22 @@ class StatsServiceTest {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/maxSales.csv")
-    void calculateMaxSalesMonth(String str, String statistics, String maxSalesMonth) {
+    void calculateMaxSalesMonth(String str, String statistics, long maxSalesMonth) {
         StatsService service = new StatsService();
         TransformStrToLong transform = new TransformStrToLong();
         long[] statisticsList = transform.calculate(statistics);
-        long[] maxSalesMonthList = transform.calculate(maxSalesMonth);
-        long[] actual = service.calculateMaxSales(statisticsList);
-        assertArrayEquals(maxSalesMonthList, actual);
+        long actual = service.calculateMaxSales(statisticsList);
+        assertEquals(maxSalesMonth, actual);
     }
 
     @ParameterizedTest
     @CsvFileSource(resources = "/minSales.csv")
-    void calculateMinSalesMonth(String str, String statistics, String minSalesLong) {
+    void calculateMinSalesMonth(String str, String statistics, long minSalesLong) {
         StatsService service = new StatsService();
         TransformStrToLong transform = new TransformStrToLong();
         long[] statisticsList = transform.calculate(statistics);
-        long[] minSalesLongList = transform.calculate(minSalesLong);
-        long[] actual = service.calculateMinSales(statisticsList);
-        assertArrayEquals(minSalesLongList, actual);
+        long actual = service.calculateMinSales(statisticsList);
+        assertEquals(minSalesLong, actual);
     }
 
     @ParameterizedTest

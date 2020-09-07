@@ -19,66 +19,30 @@ public class StatsService {
         return sum / quantity;
     }
 
-    public long[] calculateMaxSales(long[] statistics) {
+    public long calculateMaxSales(long[] statistics) {
         long maxSales = statistics[0];
-        long[] maxMonth = {0};
         long month = 1;
-        int index = 0;
-        for (long sales : statistics) {
-            if (sales == maxSales) {
-                index += 1;
+        long maxMonth = 0;
+        for (int i = 0; i < statistics.length; i++) {
+            if (statistics[i] >= maxSales) {
+                maxSales = statistics[i];
+                maxMonth = month;
             }
-            if (sales > maxSales) {
-                maxSales = sales;
-                maxMonth[0] = month;
-                index = 1;
-            }
-            month += 1;
-        }
-        if (index != 1) {
-            long[] maxList = new long[index];
-            month = 1;
-            index = 0;
-            for (long sales : statistics) {
-                if (maxSales == sales) {
-                    maxList[index] = month;
-                    index += 1;
-                }
-                month += 1;
-            }
-            return maxList;
+            month++;
         }
         return maxMonth;
     }
 
-    public long[] calculateMinSales(long[] statistics) {
+    public long calculateMinSales(long[] statistics) {
         long minSales = statistics[0];
-        long[] minMonth = {0};
+        long minMonth = 0;
         long month = 1;
-        int index = 0;
-        for (long sales : statistics) {
-            if (sales == minSales) {
-                index += 1;
+        for (int i = 0; i < statistics.length; i++) {
+            if (statistics[i] <= minSales) {
+                minSales = statistics[i];
+                minMonth = month;
             }
-            if (sales < minSales) {
-                minSales = sales;
-                minMonth[0] = month;
-                index = 1;
-            }
-            month += 1;
-        }
-        if (index != 1) {
-            long[] minList = new long[index];
-            month = 1;
-            index = 0;
-            for (long sales : statistics) {
-                if (minSales == sales) {
-                    minList[index] = month;
-                    index += 1;
-                }
-                month += 1;
-            }
-            return minList;
+            month++;
         }
         return minMonth;
     }
